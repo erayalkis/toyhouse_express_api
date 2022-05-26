@@ -17,14 +17,17 @@ async function fetchCharacter(id) {
       name: info.find("span.display-user").text(),
       link: info.find("span.display-user a").attr("href")
     }
-    let desc = $("div.profile-content-content").text();
+    let desc = $("div.profile-content-content").text().replace(/\n|\r/g, "").trim();
 
     let recent_images = []
     gallery.find("a.magnific-item").each((idx, ele) => {
       recent_images.push(ele.attribs.href);
     })
 
-    let fav_count = info.find("dl.fields div.fields-field").eq(2).find(".col-sm-8").text();
+    let fav_count = info.find("dl.fields div.fields-field").eq(2).find(".col-sm-8").text().trim();
+    let created_at = info.find("abbr.datetime").attr("title");
+    let created_n_ago = info.find("dl.fields div.fields-field").eq(0).find(".col-sm-8").text().trim();
+    console.log(created_at);
 
     return {
       name,
@@ -32,7 +35,9 @@ async function fetchCharacter(id) {
       creator,
       desc,
       recent_images,
-      fav_count
+      fav_count,
+      created_at,
+      created_n_ago
     }
   });
 
