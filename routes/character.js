@@ -4,9 +4,8 @@ const { fetchCharacter } = require("../services/mainScraper");
 
 router.get("/:id", async (req, res) => {
   let character = await fetchCharacter(req.params.id);
-  console.log(character);
   // res.send(`Character with ID: ${req.params.id}`);
-  res.send(character);
+  res.json(character);
 });
 
 router.get("/:id/details", (req, res) => {
