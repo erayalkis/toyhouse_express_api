@@ -4,8 +4,12 @@
   "description": "An API for Toyhou.se that uses webscraping to gather character data.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node ./app/index.js"
   },
   "author": "Eray Alkış",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
