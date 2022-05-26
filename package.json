@@ -1,0 +1,11 @@
+{
+  "name": "toyhouse_express_api",
+  "version": "1.0.0",
+  "description": "An API for Toyhou.se that uses webscraping to gather character data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eray Alkış",
+  "license": "ISC"
+}
