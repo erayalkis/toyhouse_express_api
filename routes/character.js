@@ -6,11 +6,11 @@ router.get("/:id", (req, res) => {
 });
 
 router.get("/:id/details", (req, res) => {
-
+  res.send(`Character details of character with ID: ${req.params.id}`);
 });
 
 router.get("/:id/gallery", (req, res) => {
-
+  res.send(`Character gallery of character with ID: ${req.params.id}`);
 });
 
 module.exports = router;
