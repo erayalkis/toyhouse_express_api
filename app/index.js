@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const character = require("../routes/character");
 
 const APP_PORT = 8000;
 
@@ -12,6 +13,4 @@ app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
-app.get("/character/:id", (req, res) => {
-  res.send(`Character with ID: ${req.params.id}`);
-});
+app.use("/character", character);
