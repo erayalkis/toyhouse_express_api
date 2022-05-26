@@ -7,6 +7,7 @@ async function fetchCharacter(id) {
     const $ = cheerio.load(res.data);
     let info = $("div.profile-info-section");
     let gallery = $("ul.magnific-gallery");
+    let char_tags = $("div.profile-tags-content");
 
     let name = $("h1.display-4").text();
     let owner = { 
@@ -24,10 +25,14 @@ async function fetchCharacter(id) {
       recent_images.push(ele.attribs.href);
     })
 
+    let tags = [];
+    char_tags.find("a.badge").each((idx, ele) => {
+      tags.push($(ele).text());
+    });
+
     let fav_count = info.find("dl.fields div.fields-field").eq(2).find(".col-sm-8").text().trim();
     let created_at = info.find("abbr.datetime").attr("title");
     let created_n_ago = info.find("dl.fields div.fields-field").eq(0).find(".col-sm-8").text().trim();
-    console.log(created_at);
 
     return {
       name,
@@ -37,7 +42,8 @@ async function fetchCharacter(id) {
       recent_images,
       fav_count,
       created_at,
-      created_n_ago
+      created_n_ago,
+      tags
     }
   });
 
