@@ -13,6 +13,5 @@ app.get("/", (req, res) => {
 });
 
 app.get("/character/:id", (req, res) => {
-  // res.send(`Character with ID: ${req.params.id}`);
-  res.send("boobie")
-})
+  res.send(`Character with ID: ${req.params.id}`);
+});
