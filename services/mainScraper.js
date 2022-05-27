@@ -25,6 +25,12 @@ async function fetchCharacter(id) {
 
   logger.info(`Successfully fetched ${URL}`);
   const $ = cheerio.load(res.data);
+  if($("li.header").text() != "Character") {
+    logger.error(`${URL} is not a character profile or has custom CSS!`);
+    return {
+      error: 'The given ID belongs to a user profile or a profile with custom CSS'
+    }
+  }
 
   let info = $("div.profile-info-section");
   let gallery = $("ul.magnific-gallery");
