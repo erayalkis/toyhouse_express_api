@@ -31,7 +31,6 @@ async function getCharacterData(URL, html, type) {
       break;
   }
 
-  logger.info("Left switch statement");
   return data;
 }
 
