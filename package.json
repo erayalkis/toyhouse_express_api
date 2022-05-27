@@ -13,6 +13,8 @@
     "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.11",
     "express": "^4.18.1",
-    "nodemon": "^2.0.16"
+    "express-winston": "^4.2.0",
+    "nodemon": "^2.0.16",
+    "winston": "^3.7.2"
   }
 }
