@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./app/index.js"
+    "dev": "nodemon ./app/index.js | pino-pretty"
   },
   "author": "Eray Alkış",
   "license": "ISC",
@@ -13,6 +13,8 @@
     "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.11",
     "express": "^4.18.1",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "pino": "^7.11.0",
+    "pino-pretty": "^7.6.1"
   }
 }
