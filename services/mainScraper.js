@@ -2,9 +2,20 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 async function fetchCharacter(id) {
-  const res = await axios.get(`https://toyhou.se/${id}`);
+  let res;
+
+  try {
+    res = await axios.get(`https://toyhou.se/${id}`);
+  } catch (AxiosError) {
+    console.error(AxiosError);
+
+    return {
+      error: 'Character ID is invalid or character profile is locked',
+    }
+  }
+
   const $ = cheerio.load(res.data);
-  
+
   let info = $("div.profile-info-section");
   let gallery = $("ul.magnific-gallery");
   let char_tags = $("div.profile-tags-content");
