@@ -1,19 +1,29 @@
 const express = require("express");
 const router = express.Router();
-const { fetchCharacter } = require("../services/mainScraper");
+const Character = require("../services/Character");
 
-router.get("/:id", async (req, res) => {
-  let character = await fetchCharacter(req.params.id);
-  // res.send(`Character with ID: ${req.params.id}`);
-  res.json(character).status(character.error ? 404 : 200);
+router.get("/:id", createCharObj, async (req, res) => {
+  const { character } = req;
+
+  res.json(character);
 });
 
-router.get("/:id/details", (req, res) => {
-  res.send(`Character details of character with ID: ${req.params.id}`);
+router.get("/:id/details", createCharObj, (req, res) => {
+  const { character } = req;
+
+  res.json(character);
 });
 
-router.get("/:id/gallery", (req, res) => {
-  res.send(`Character gallery of character with ID: ${req.params.id}`);
+router.get("/:id/gallery", createCharObj, (req, res) => {
+  const { character } = req;
+
+  res.json(character);
 });
+
+async function createCharObj(req, res, next) {
+  let character = new Character(req.params.id, req.path);
+  req.character = await character.data();
+  next();
+}
 
 module.exports = router;
