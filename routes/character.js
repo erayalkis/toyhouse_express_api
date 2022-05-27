@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Character = require("../services/Character");
+const Character = require("../models/Character");
 
 router.get("/:id", createCharObj, async (req, res) => {
   const { character } = req;
