@@ -1,19 +1,29 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
+const logger = require("pino")();
 
 async function fetchCharacter(id) {
+  const URL = `https://toyhou.se/${id}`;
   let res;
 
+  logger.info(`Fetching ${URL}`);
   try {
-    res = await axios.get(`https://toyhou.se/${id}`);
+    res = await axios.get(URL);
   } catch (AxiosError) {
-    console.error(AxiosError);
-
-    return {
-      error: 'Character ID is invalid or character profile is locked',
+    logger.error(AxiosError.message);
+    switch(AxiosError.response.status) {
+      case 500:
+        return {
+          error: 'Something went wrong while processing the character, Toyhouse servers might be down',
+        }
+      case 404:
+        return {
+          error: 'Character ID is invalid or character profile is locked',
+        }
     }
   }
 
+  logger.info(`Successfully fetched ${URL}`);
   const $ = cheerio.load(res.data);
 
   let info = $("div.profile-info-section");
@@ -44,7 +54,8 @@ async function fetchCharacter(id) {
   let fav_count = info.find("dl.fields div.fields-field").eq(2).find(".col-sm-8").text().trim();
   let created_at = info.find("abbr.datetime").attr("title");
   let created_n_ago = info.find("dl.fields div.fields-field").eq(0).find(".col-sm-8").text().trim();
-
+  
+  logger.info(`Ending process for ${URL}`);
   return {
     name,
     owner,
