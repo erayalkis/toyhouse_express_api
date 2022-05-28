@@ -1,7 +1,7 @@
 const logger = require("pino")();
 
 async function parseGallery($) {
-  let character = {}
+  const character = {}
 
   character.name = $("h1.image-gallery-title a").text();
 

@@ -1,6 +1,6 @@
 
 async function parseProfile($, all=true) {
-  let character = {};
+  const character = {};
 
   let info = $("div.profile-info-section");
   let gallery = $("ul.magnific-gallery");
@@ -10,8 +10,8 @@ async function parseProfile($, all=true) {
     name: $("div.profile-name-info span.display-user").text(),
     link: $("div.profile-name-info span.display-user a").attr("href")
   }
-
   character.name = $("h1.display-4").text();
+  character.profile_img = $("img.profile-name-icon").attr("src");
 
   if(all) {
     character.creator = {
