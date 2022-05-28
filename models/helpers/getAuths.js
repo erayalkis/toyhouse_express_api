@@ -1,8 +1,9 @@
+const { default: axios, Axios } = require("axios");
 const request = require("request");
 const logger = require("pino")();
+const cheerio = require("cheerio");
 
-async function getAuths() {
-
+async function getCookie() {
   const options = {
     'method': 'POST',
     'url': 'https://toyhou.se/~account/login',
@@ -18,12 +19,22 @@ async function getAuths() {
   };
 
   logger.info("Getting auths");
-  let res = await request(options, (err, res) => {
+  request(options, (err, res) => {
     if(err) console.log(err);
     logger.info("Finished getting auths");
 
-    console.log(res.headers["set-cookie"]);
+    console.log(res.headers["set-cookie"][1]);
   })
+}
+
+async function getAuths() {
+
+  try {
+    let res = await axios.get("https://toyhou.se/~account/authorizers");
+  } catch(AxiosError) {
+    logger.error(AxiosError.message);
+  }
+  let $ = cheerio.load(res.data);
 
 }
 
